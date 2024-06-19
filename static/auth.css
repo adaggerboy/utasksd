@@ -1,0 +1,101 @@
+body {
+    font-family: 'Roboto';
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    width: 300px; /* Adjust max-width as needed */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.form-group label {
+    padding-left: 10px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    margin-top: 3px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box; /* Ensure input width includes padding */
+}
+
+button {
+    padding: 10px;
+    background-color: var(--accent2);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    width: 80%;
+    transition: 0.5s;
+}
+
+button:hover {
+    background-color: var(--accent2hover);
+}
+
+.side-button {
+    padding: 10px;
+    background-color: #c4c4c4;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    width: 80%;
+}
+
+.side-button:hover {
+    background-color: #e1e1e1;
+}
+
+.error {
+    font-size: 0.8em;
+    color: gray;
+    width: 90%;
+}
+
+.break {
+    width: 90%;
+    border-bottom: #e4e4e4 1px solid;
+    margin-bottom: 10px;
+}

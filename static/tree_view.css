@@ -1,0 +1,136 @@
+.tree {
+    /* border: black 1px solid; */
+    border-left: 1px solid #aaa;
+    /* border-right: 1px solid #aaa; */
+    background-color: #fcfcfc;
+    padding-top: 10px;
+    padding-left: 0;
+    --spacing : 1.2rem;
+    --radius  : 5px;
+    overflow-y: scroll;
+    height: calc(100% - 80px);
+}
+
+.tree li {
+    display: block;
+    position: relative;
+    padding-left: calc(2 * var(--spacing) - var(--radius) - 2px);
+}
+
+.tree ul {
+    margin-left: calc(var(--radius) - var(--spacing));
+    padding-left: 0;
+}
+
+.tree ul li {
+    border-left: 1px solid #ddd;
+}
+
+.tree ul li:last-child {
+    border-color: transparent;
+}
+
+.tree ul li::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(var(--spacing) / -2);
+    left: -1px;
+    width: calc(var(--spacing) + 1px);
+    height: calc(var(--spacing) + 1px);
+    border: solid #ddd;
+    border-width: 0 0 1px 1px;
+}
+
+.tree summary {
+    display: block;
+    cursor: pointer;
+}
+
+.tree summary::marker,
+.tree summary::-webkit-details-marker {
+    display: none;
+}
+
+.tree summary:focus {
+    outline: none;
+}
+
+.tree summary:focus-visible {
+    outline: 1px dotted #000;
+}
+
+
+.tree li::after,
+.tree summary::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(var(--spacing) / 2 - var(--radius));
+    left: calc(var(--spacing) - var(--radius) - 1px);
+    width: calc(2 * var(--radius));
+    height: calc(2 * var(--radius));
+    border-radius: 50%;
+    background: #ddd;
+}
+
+
+.tree details[open]>summary::before {
+    background-position: calc(-2 * var(--radius)) 0;
+}
+
+/* Source: https://iamkate.com/code/tree-views/ */
+
+.tree a {
+    color: #000;
+    text-decoration: none;
+}
+
+.tree a:hover {
+    text-decoration: underline;
+}
+
+.tree span {
+    color: #888;
+    font-size: 0.8em;
+}
+
+.tree .project-node::after {
+    z-index: 1;
+    background: var(--accent1) !important;
+    border-radius: 0 !important;
+}
+
+.tree .project-node-name {
+    font-weight: 500;
+}
+
+.tree .project-node::after {
+    z-index: 1;
+    background: var(--accent1) !important;
+    border-radius: 0 !important;
+}
+
+.tree .in-progress-node::after {
+    z-index: 1;
+    background: var(--task-inprogress) !important;
+}
+
+.tree .done-node::after {
+    z-index: 1;
+    background: var(--task-done) !important;
+}
+.tree .to-do-node::after {
+    z-index: 1;
+    background: var(--task-todo) !important;
+}
+
+.tree .waiting-node::after {
+    z-index: 1;
+    background: var(--task-waiting) !important;
+}
+
+.tree .testing-node::after {
+    z-index: 1;
+    background: var(--task-testing) !important;
+}

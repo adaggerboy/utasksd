@@ -1,0 +1,36 @@
+database:
+  name: "main"
+  driver: "postgres"
+  host: "localhost"
+  user: "authuser"
+  database: "authdb"
+  password: "authpass"
+  port: 5432
+  timeout: 30
+
+smtp:
+  host: "sandbox.smtp.mailtrap.io"
+  user: "6d3729fe8f0f99"
+  email: "test@example.com"
+  password: "faafbd4e2d26ae"
+  port: 2525
+
+http:
+  cookie_secure: false
+  domain: "localhost"
+  token_duration: 900
+  endpoints:
+    - ":10200"
+
+jwt:
+  issuer: utasksd-main-service
+  signing_key: testing
+  passphrase: 6368616e676520746869732070617373
+  method: hmac
+
+
+
+templates_location: ./web
+static_location: ./static
+data_location: ./data
+

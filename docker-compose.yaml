@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+  db:
+    hostname: postgres
+    image: docker.io/postgres:13
+    environment:
+      POSTGRES_DB: authdb
+      POSTGRES_USER: authuser
+      POSTGRES_PASSWORD: authpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - utasksd-db-data3:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  utasksd:
+    build: .
+    environment:
+    depends_on:
+      - db
+    ports:
+      - "10200:10200"
+    volumes:
+      - ./config/config.yaml:/etc/utasksd/config.yaml:ro
+      - ./web:/etc/utasksd/web:ro
+      - ./static:/etc/utasksd/static:ro
+      - ./data:/var/utasksd/data
+    restart: unless-stopped
+
+volumes:
+  utasksd-db-data3:
