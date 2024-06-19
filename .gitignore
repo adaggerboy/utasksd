@@ -1,4 +1,4 @@
-cmd/utasksd/utasksd
-utasksd
-data
-data/*
+/cmd/utasksd/utasksd
+/utasksd
+/data
+/data/*
