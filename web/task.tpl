@@ -39,7 +39,7 @@
         </nav>
         <div class="account-section">
             <img src="{{ .Core.Account.PathToAvatar }}" alt="" />
-            <span class="account-name">{{ .Core.Account.Name }}</span>
+            <a class="account-name" href="/web/user/{{ .Core.Account.ID }}">{{ .Core.Account.Name }}</a>
             <button class="logout-button" onclick="logout()">Logout</button>
         </div>
     </header>

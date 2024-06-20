@@ -32,6 +32,7 @@ type Account struct {
 	ID           int
 	PathToAvatar string
 	Name         string
+	Email        string
 	Role         string
 }
 
@@ -203,4 +204,10 @@ type ProjectRoot struct {
 	Core    Core
 	Project Project
 	IsOwner bool
+}
+
+type UserRoot struct {
+	User  generic.User
+	ItsMe bool
+	Core  Core
 }

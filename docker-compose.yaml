@@ -14,19 +14,19 @@ services:
       - utasksd-db-data3:/var/lib/postgresql/data
     restart: unless-stopped
 
-  utasksd:
-    build: .
-    environment:
-    depends_on:
-      - db
-    ports:
-      - "10200:10200"
-    volumes:
-      - ./config/config.yaml:/etc/utasksd/config.yaml:ro
-      - ./web:/etc/utasksd/web:ro
-      - ./static:/etc/utasksd/static:ro
-      - ./data:/var/utasksd/data
-    restart: unless-stopped
+  # utasksd:
+  #   build: .
+  #   environment:
+  #   depends_on:
+  #     - db
+  #   ports:
+  #     - "10200:10200"
+  #   volumes:
+  #     - ./config/config.yaml:/etc/utasksd/config.yaml:ro
+  #     - ./web:/etc/utasksd/web:ro
+  #     - ./static:/etc/utasksd/static:ro
+  #     - ./data:/var/utasksd/data
+  #   restart: unless-stopped
 
 volumes:
   utasksd-db-data3:

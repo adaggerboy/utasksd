@@ -37,7 +37,14 @@
     /* align-items: center; */
     /* margin-bottom: 5px; */
 }
+/* 
+#user-table-body td {
+    width: 100%;
+} */
 
+.table-avatar {
+    width: 100%;
+}
 
 .table-avatar img {
     display: inline-block;

@@ -40,7 +40,7 @@
         </nav>
         <div class="account-section">
             <img src="{{ .Core.Account.PathToAvatar }}" alt="" />
-            <span class="account-name">{{ .Core.Account.Name }}</span>
+            <a class="account-name" href="/web/user/{{ .Core.Account.ID }}">{{ .Core.Account.Name }}</a>
             <button class="logout-button" onclick="logout()">Logout</button>
         </div>
     </header>
@@ -63,6 +63,7 @@
                         <thead>
                             <tr>
                                 <th>User</th>
+                                <th>Email</th>
                                 <th>Role</th>
                                 <th>Action</th>
                             </tr>
@@ -71,6 +72,7 @@
                             {{range .Project.Users}}
                             <tr data-user-id="{{ .ID }}">
                                 <td class="table-avatar"><img src="{{ .PathToAvatar }}" alt=""><span>{{ .Name }}</span></td>
+                                <td>{{ .Email }}</td>
                                 <td>
                                     <select value="{{ .Role }}">
                                         <option value="manager" {{ if eq .Role "manager" }}selected{{end}}>Manager</option>

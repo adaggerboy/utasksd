@@ -31,7 +31,7 @@ func EnsureUsersDirectorCapability(ctx context.IContext) {
 	m, _, err := ctx.GetDatabase().EnsureUsersCapability(ctx, userID)
 	if err != nil {
 		ctx.AddPrivateError(http.StatusInternalServerError, fmt.Errorf("read database EnsureAdminUsersManageCapability(): %s", err))
-	} else if !m && false {
+	} else if !m {
 		ctx.AddPublicError(http.StatusForbidden, "Access denied")
 	}
 }
@@ -52,6 +52,7 @@ func GetUserInfo(ctx context.IContext, userID int) (user *generic.User) {
 		ctx.AddPublicError(http.StatusNotFound, "User not found")
 		return
 	}
+	user.ID = userID
 	return
 }
 

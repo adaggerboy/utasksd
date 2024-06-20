@@ -59,6 +59,7 @@ func loadTemplates() {
 		"login":             config.GlobalConfig.TemplatesLocation + "/login.tpl",
 		"register":          config.GlobalConfig.TemplatesLocation + "/register.tpl",
 		"list_view":         config.GlobalConfig.TemplatesLocation + "/list_view.tpl",
+		"user":              config.GlobalConfig.TemplatesLocation + "/user.tpl",
 		"issue_list_view":   config.GlobalConfig.TemplatesLocation + "/issue_list_view.tpl",
 		"project_list_view": config.GlobalConfig.TemplatesLocation + "/project_list_view.tpl",
 		"users_list_view":   config.GlobalConfig.TemplatesLocation + "/users_list_view.tpl",

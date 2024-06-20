@@ -104,6 +104,7 @@ func RenderProjectView(ctx context.IContext, projectID int) (data []byte) {
 		input.Project.Users = append(input.Project.Users, rendering.Account{
 			ID:           k,
 			Name:         *projUser.Firstname + " " + *projUser.Lastname,
+			Email:        *projUser.Email,
 			PathToAvatar: *projUser.AvatarPath,
 			Role:         "worker",
 		})
@@ -117,6 +118,7 @@ func RenderProjectView(ctx context.IContext, projectID int) (data []byte) {
 		input.Project.Users = append(input.Project.Users, rendering.Account{
 			ID:           k,
 			Name:         *projUser.Firstname + " " + *projUser.Lastname,
+			Email:        *projUser.Email,
 			PathToAvatar: *projUser.AvatarPath,
 			Role:         "manager",
 		})
@@ -130,6 +132,7 @@ func RenderProjectView(ctx context.IContext, projectID int) (data []byte) {
 		input.Project.Users = append(input.Project.Users, rendering.Account{
 			ID:           k,
 			Name:         *projUser.Firstname + " " + *projUser.Lastname,
+			Email:        *projUser.Email,
 			PathToAvatar: *projUser.AvatarPath,
 			Role:         "support",
 		})

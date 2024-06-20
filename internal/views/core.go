@@ -60,6 +60,7 @@ func RenderCoreInfo(ctx context.IContext, core *rendering.Core) (user *generic.U
 	core.Account = rendering.Account{
 		Name:         *user.Firstname + " " + *user.Lastname,
 		PathToAvatar: *user.AvatarPath,
+		ID:           user.ID,
 	}
 
 	core.Options = []rendering.Option{
@@ -72,7 +73,7 @@ func RenderCoreInfo(ctx context.IContext, core *rendering.Core) (user *generic.U
 		core.Options = append(core.Options, rendering.Option{Href: "/web/users", Label: "Users"})
 	}
 
-	if *user.IsDirector || true {
+	if *user.IsDirector {
 		core.Options = append(core.Options, rendering.Option{Href: "/web/create_project", Label: "+ Create project"})
 	}
 	return

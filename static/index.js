@@ -625,10 +625,10 @@ function saveUser(cell) {
 
     let id = parseInt(foundRow.querySelector('td:nth-child(2)').innerHTML);
 
-    const newPassword = foundRow.querySelector('td:nth-child(6) input[type="password"]').value;
-    const isDirector = foundRow.querySelector('td:nth-child(7) input[type="checkbox"]').checked;
-    const isAdmin = foundRow.querySelector('td:nth-child(8) input[type="checkbox"]').checked;
-    const isActive = foundRow.querySelector('td:nth-child(9) input[type="checkbox"]').checked;
+    const newPassword = foundRow.querySelector('td:nth-child(7) input[type="password"]').value;
+    const isDirector = foundRow.querySelector('td:nth-child(8) input[type="checkbox"]').checked;
+    const isAdmin = foundRow.querySelector('td:nth-child(9) input[type="checkbox"]').checked;
+    const isActive = foundRow.querySelector('td:nth-child(10) input[type="checkbox"]').checked;
 
     if (newPassword !== '') {
 
@@ -674,12 +674,13 @@ const fetchUserData = async (id) =>
         .then((response) => response.json());
 
 
-function addUserToTable(id, avatar, firstName, lastName) {
+function addUserToTable(id, avatar, firstName, lastName, email) {
     let tableBody = document.querySelectorAll('#user-table-body tbody')[0];
     let row = document.createElement('tr');
     row.setAttribute('data-user-id', id);
     row.innerHTML = `
         <td class="table-avatar"><img src="${avatar}" alt="User Avatar"><span>${firstName} ${lastName}</span></td>
+        <td>${email}</td>
         <td>
             <select value="worker">
                 <option value="manager">Manager</option>
@@ -708,7 +709,7 @@ async function addUser() {
     }
 
     fetchUserData(userId).then((userData) => {
-        addUserToTable(userId, userData.avatar_path, userData.firstname, userData.lastname);
+        addUserToTable(userId, userData.avatar_path, userData.firstname, userData.lastname, userData.email);
     })
     .catch((error) => {
         console.error("Error:", error);
@@ -756,9 +757,35 @@ function updateProject() {
     
 }
 
+function updateUser() {
+    const userID = window.jsGlobals.userID;
+
+    const userAva = document.getElementById('logo').src;
+
+    fetchApi(`/api/v1/user/${userID}`, "PUT", {
+        avatar_path: new URL(userAva).pathname,
+    })
+    .then((response) => handleFetchResponse(response, `/web/user/${userID}`))
+    .catch((error) => {
+        console.error("Error:", error);
+        alert("Update user failed: " + error.message);
+    });
+    
+}
+
 function changeAva(filePath) {
     document.getElementById("logo").src = filePath
 }
 
 handleUpload("uploadBtn", addImageToAttachments);
 handleUpload("avaBtn", changeAva);
+
+
+function deactivateUser() {
+    fetchApi(`/api/v1/user`, "DELETE")
+        .then((response) => handleFetchResponse(response, "/web/index"))
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("Delete user failed: " + error.message);
+        });
+}

@@ -80,6 +80,12 @@ func DeployWebRoutes(r gin.IRouter) {
 		},
 	))
 
+	r.GET("user/:id", ginhelpers.WrapContextWebID(
+		func(ctx *gin.Context, nctx *ginhelpers.GinWrapper, userID int) (code int, cType string, data []byte) {
+			return http.StatusOK, "text/html", views.RenderUserView(nctx, userID)
+		},
+	))
+
 	r.GET("project/:id/create_report", ginhelpers.WrapContextWebID(
 		func(ctx *gin.Context, nctx *ginhelpers.GinWrapper, projectID int) (code int, cType string, data []byte) {
 			return http.StatusOK, "text/html", views.RenderCreateReportView(nctx, projectID)

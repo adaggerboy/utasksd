@@ -38,3 +38,25 @@ func RenderUserListView(ctx context.IContext) (data []byte) {
 
 	return RenderAs(ctx, "users_list_view", input)
 }
+
+func RenderUserView(ctx context.IContext, userID int) (data []byte) {
+
+	core := GetRendererCoreStruct()
+	user := RenderCoreInfo(ctx, &core)
+	if !ctx.IsActive() {
+		return
+	}
+
+	userTarget := controllers.GetUserInfo(ctx, userID)
+	if !ctx.IsActive() {
+		return
+	}
+
+	input := rendering.UserRoot{
+		Core:  core,
+		ItsMe: user.ID == userTarget.ID,
+		User:  *userTarget,
+	}
+
+	return RenderAs(ctx, "user", input)
+}

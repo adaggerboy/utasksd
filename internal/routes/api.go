@@ -92,6 +92,7 @@ func DeployUserRoutes(r gin.IRouter) {
 
 	r.DELETE("", ginhelpers.WrapContext(
 		func(ctx *gin.Context, nctx *ginhelpers.GinWrapper) (code int, obj interface{}) {
+			ginhelpers.ResetToken(ctx, config.GlobalConfig.HTTPServer.Domain, config.GlobalConfig.HTTPServer.CookieSecure)
 			controllers.DeleteMyUser(nctx)
 			return http.StatusOK, nil
 		},

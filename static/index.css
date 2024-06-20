@@ -137,6 +137,15 @@ header img {
 
 .account-section .account-name {
     color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: 0.3s;
+    padding: 8px 8px;
+}
+
+
+.account-section .account-name:hover{
+    background-color: var(--accent2hover);
 }
 
 .account-section .logout-button {
