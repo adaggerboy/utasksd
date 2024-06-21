@@ -945,7 +945,7 @@ func (db *PostgresConnection) TasksReport(ctx context.Context, request reqresp.R
 
 func (db *PostgresConnection) TimeEfficiencyReport(ctx context.Context, request reqresp.ReportRequest) (perUser []generic.TimeEfficiencyReport, err error) {
 	perUser = []generic.TimeEfficiencyReport{}
-	err = db.genericQueryForeach(ctx, "tasks_report", func(r *sql.Rows) error {
+	err = db.genericQueryForeach(ctx, "time_efficiency_report", func(r *sql.Rows) error {
 		var next generic.TimeEfficiencyReport
 		if err := r.Scan(&next.ID, &next.Username, &next.Firstname, &next.Lastname, &next.TrackedRecords, &next.SummaryHours, &next.AveragePerDay, &next.AveragePerMonth); err != nil {
 			return err

@@ -467,3 +467,53 @@ grant execute on procedure delete_unused_attachments to administrator;
 
 
 grant select, usage on all sequences in schema public to generic;
+
+
+--new triggers
+
+create or replace function check_issue_and_task_status()
+returns trigger as $$
+begin
+    if (select status from issues where id = new.issue_id) = 'closed' then
+        raise exception 'cannot assign closed issues to tasks';
+    end if;
+    
+    if (select status from tasks where id = new.task_id) = 'done' then
+        raise exception 'cannot assign issues to tasks that are marked as done';
+    end if;
+    
+    return new;
+end;
+$$ language plpgsql;
+
+drop trigger if exists forbid_closed_issues_and_done_tasks on tasks_issues;
+create trigger forbid_closed_issues_and_done_tasks
+before insert on tasks_issues
+for each row
+execute function check_issue_and_task_status();
+
+create or replace function check_tracking_dates()
+returns trigger as $$
+declare
+    task_start_date timestamp;
+    task_due_date timestamp;
+begin
+    select start_date, due_date into task_start_date, task_due_date from tasks where id = new.task_id;
+    
+    if new.end_date < task_start_date then
+        raise exception 'cannot create tracking record before task start date';
+    end if;
+    
+    if task_due_date is not null and new.end_date > task_due_date then
+        raise exception 'cannot create tracking record after task due date';
+    end if;
+    
+    return new;
+end;
+$$ language plpgsql;
+
+drop trigger if exists forbid_invalid_tracking_dates on tracking_records;
+create trigger forbid_invalid_tracking_dates
+before insert on tracking_records
+for each row
+execute function check_tracking_dates();

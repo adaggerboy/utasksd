@@ -15,7 +15,10 @@ type CommonDate struct {
 func (t *CommonDate) UnmarshalJSON(b []byte) (err error) {
 	date, err := time.Parse(`"2006-01-02"`, string(b))
 	if err != nil {
-		return err
+		date, err = time.Parse(`"2006-01"`, string(b))
+		if err != nil {
+			return err
+		}
 	}
 	t.Time = date
 	return
