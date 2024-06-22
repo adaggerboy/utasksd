@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func DeployRootRoutes(r gin.IRouter) {
+func DeployRootRoutes(r gin.IRouter, static string) {
 	r.GET("", func(ctx *gin.Context) {
 		ctx.Header("Location", "/web/index")
 		ctx.Status(http.StatusMovedPermanently)
@@ -16,15 +16,15 @@ func DeployRootRoutes(r gin.IRouter) {
 		ctx.Status(http.StatusMovedPermanently)
 	})
 	r.GET("web/null", func(ctx *gin.Context) {
-		ctx.File("./static/null")
+		ctx.File(static + "/null")
 	})
 	r.GET("null", func(ctx *gin.Context) {
-		ctx.File("./static/null")
+		ctx.File(static + "/null")
 	})
 	r.GET("favicon.ico", func(ctx *gin.Context) {
-		ctx.File("./static/favicon.ico")
+		ctx.File(static + "/favicon.ico")
 	})
 	r.GET("/web/favicon.ico", func(ctx *gin.Context) {
-		ctx.File("./static/favicon.ico")
+		ctx.File(static + "/favicon.ico")
 	})
 }

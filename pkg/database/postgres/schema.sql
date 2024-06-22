@@ -475,13 +475,16 @@ create or replace function check_issue_and_task_status()
 returns trigger as $$
 begin
     if (select status from issues where id = new.issue_id) = 'closed' then
-        raise exception 'cannot assign closed issues to tasks';
+        if (select status from tasks where id = new.task_id) = 'done' then
+            return new; 
+        else
+            raise exception 'cannot assign closed issues to tasks that are not done';
+        end if;
     end if;
-    
+
     if (select status from tasks where id = new.task_id) = 'done' then
-        raise exception 'cannot assign issues to tasks that are marked as done';
+        raise exception 'cannot assign issues to tasks that are marked as done unless the issue is closed';
     end if;
-    
     return new;
 end;
 $$ language plpgsql;
@@ -517,3 +520,34 @@ create trigger forbid_invalid_tracking_dates
 before insert on tracking_records
 for each row
 execute function check_tracking_dates();
+
+
+create or replace function check_issue_dates() returns trigger as $$
+begin
+    if new.close_date is not null and new.close_date < new.open_date then
+        raise exception 'close_date cannot be less than open_date';
+    end if;
+    return new;
+end;
+$$ language plpgsql;
+
+create or replace function check_task_dates() returns trigger as $$
+begin
+    if new.due_date is not null and new.due_date < new.start_date then
+        raise exception 'due_date cannot be less than start_date';
+    end if;
+    return new;
+end;
+$$ language plpgsql;
+
+drop trigger if exists trg_check_issue_dates on issues;
+create trigger trg_check_issue_dates
+before insert or update on issues
+for each row
+execute function check_issue_dates();
+
+drop trigger if exists trg_check_task_dates on tasks;
+create trigger trg_check_task_dates
+before insert or update on tasks
+for each row
+execute function check_task_dates();

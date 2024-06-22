@@ -762,7 +762,7 @@ function updateUser() {
 
     const userAva = document.getElementById('logo').src;
 
-    fetchApi(`/api/v1/user/${userID}`, "PUT", {
+    fetchApi(`/api/v1/user`, "PUT", {
         avatar_path: new URL(userAva).pathname,
     })
     .then((response) => handleFetchResponse(response, `/web/user/${userID}`))

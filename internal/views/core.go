@@ -67,10 +67,7 @@ func RenderCoreInfo(ctx context.IContext, core *rendering.Core) (user *generic.U
 		{Href: "/web/tasks", Label: "Tasks"},
 		{Href: "/web/issues", Label: "Issues"},
 		{Href: "/web/projects", Label: "Projects"},
-	}
-
-	if *user.IsAdmin {
-		core.Options = append(core.Options, rendering.Option{Href: "/web/users", Label: "Users"})
+		{Href: "/web/users", Label: "Users"},
 	}
 
 	if *user.IsDirector {

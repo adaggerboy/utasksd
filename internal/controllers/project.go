@@ -99,6 +99,8 @@ func CreateProject(ctx context.IContext, project generic.Project) (resultId int)
 	if project.LogoPath == nil {
 		project.LogoPath = new(string)
 		*project.LogoPath = "null"
+	} else if (*project.LogoPath)[0] == '/' {
+		*project.LogoPath = (*project.LogoPath)[1:]
 	}
 	EnsureUsersDirectorCapability(ctx)
 	if !ctx.IsActive() {
@@ -122,7 +124,9 @@ func UpdateProject(ctx context.IContext, projectID int, project generic.Project)
 	if !ctx.IsActive() {
 		return
 	}
-
+	if (*project.LogoPath)[0] == '/' {
+		*project.LogoPath = (*project.LogoPath)[1:]
+	}
 	err := ctx.GetDatabase().UpdateProject(ctx, projectID, project)
 	if err != nil {
 		ctx.AddPrivateError(http.StatusInternalServerError, fmt.Errorf("write database UpdateProject(): %s", err))

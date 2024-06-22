@@ -92,7 +92,7 @@ func main() {
 	routes.DeployWebRoutes(engine.Group("web"))
 	routes.DeployAPIRoutes(engine.Group("api/v1"))
 	routes.DeployAttachmentsRoutes(engine.Group("files"), config.GlobalConfig.DataLocation)
-	routes.DeployRootRoutes(engine.Group(""))
+	routes.DeployRootRoutes(engine.Group(""), config.GlobalConfig.StaticLocation)
 	err := engine.Run(config.GlobalConfig.HTTPServer.Endpoints[0])
 	if err != nil {
 		panic(err)

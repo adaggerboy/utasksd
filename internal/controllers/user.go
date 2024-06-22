@@ -28,7 +28,7 @@ func EnsureUsersDirectorCapability(ctx context.IContext) {
 	if !ok {
 		return
 	}
-	m, _, err := ctx.GetDatabase().EnsureUsersCapability(ctx, userID)
+	_, m, err := ctx.GetDatabase().EnsureUsersCapability(ctx, userID)
 	if err != nil {
 		ctx.AddPrivateError(http.StatusInternalServerError, fmt.Errorf("read database EnsureAdminUsersManageCapability(): %s", err))
 	} else if !m {
@@ -79,6 +79,9 @@ func UpdateMyUser(ctx context.IContext, user generic.User) {
 	if !ok {
 		return
 	}
+	if (*user.AvatarPath)[0] == '/' {
+		*user.AvatarPath = (*user.AvatarPath)[1:]
+	}
 	err := ctx.GetDatabase().UpdateUser(ctx, userID, user)
 	if err != nil {
 		ctx.AddPrivateError(http.StatusInternalServerError, fmt.Errorf("write database UpdateMyUser(): %s", err))
@@ -102,6 +105,9 @@ func UpdateUser(ctx context.IContext, userID int, user generic.User) {
 	EnsureAdminUsersManageCapability(ctx)
 	if !ctx.IsActive() {
 		return
+	}
+	if (*user.AvatarPath)[0] == '/' {
+		*user.AvatarPath = (*user.AvatarPath)[1:]
 	}
 	err := ctx.GetDatabase().UpdateUser(ctx, userID, user)
 	if err != nil {

@@ -1,3 +1,14 @@
+
+create user bob with encrypted password '11111111'; grant generic to bob;
+create user charlie with encrypted password '11111111'; grant generic to charlie;
+create user dana with encrypted password '11111111'; grant generic to dana;
+create user eveline with encrypted password '11111111'; grant generic to eveline;
+create user bismark with encrypted password '11111111'; grant generic to bismark;
+create user matizont with encrypted password '11111111'; grant generic to matizont;
+create user supporter with encrypted password '11111111'; grant generic to supporter;
+create user ireness with encrypted password '11111111'; grant generic to ireness;
+create user jacksone with encrypted password '11111111'; grant generic to jacksone;
+
 SET session_replication_role = replica;
 
 INSERT INTO projects (owner_id, name, logo, description)
@@ -7,23 +18,23 @@ VALUES (1, 'Project Phoenix', 'null', 'Revamping the internal system.');
 -- Workers
 INSERT INTO users (email, username, firstname, lastname, avatar, is_active)
 VALUES 
-('bob@example.com', 'bobBuilder', 'Bob', 'Smith', 'null', true),
-('charlie@example.com', 'charlieTech', 'Charlie', 'Brown', 'null', true),
-('dana@example.com', 'danaCode', 'Dana', 'White', 'null', true),
-('eve@example.com', 'eveEngineer', 'Eve', 'Black', 'null', true);
+('bob@example.com', 'bob', 'Bob', 'Smith', 'null', true),
+('charlie@example.com', 'charlie', 'Charlie', 'Brown', 'null', true),
+('dana@example.com', 'dana', 'Dana', 'White', 'null', true),
+('eve@example.com', 'eveline', 'Eve', 'Black', 'null', true);
 
 -- Managers
 INSERT INTO users (email, username, firstname, lastname, avatar, is_active)
 VALUES 
-('fiona@example.com', 'fionaManager', 'Fiona', 'Green', 'null', true),
-('george@example.com', 'georgeLead', 'George', 'Blue', 'null', true);
+('fiona@example.com', 'bismark', 'Fiona', 'Green', 'null', true),
+('george@example.com', 'matizont', 'George', 'Blue', 'null', true);
 
 -- Support
 INSERT INTO users (email, username, firstname, lastname, avatar, is_active)
 VALUES 
-('hank@example.com', 'hankSupport', 'Hank', 'Grey', 'null', true),
-('irene@example.com', 'ireneHelp', 'Irene', 'Red', 'null', true),
-('jack@example.com', 'jackAssist', 'Jack', 'Yellow', 'null', true);
+('hank@example.com', 'supporter', 'Hank', 'Grey', 'null', true),
+('irene@example.com', 'ireness', 'Irene', 'Red', 'null', true),
+('jack@example.com', 'jacksone', 'Jack', 'Yellow', 'null', true);
 
 -- Workers
 INSERT INTO users_projects (user_id, project_id, access_level)

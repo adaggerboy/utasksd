@@ -16,7 +16,6 @@ services:
 
   utasksd:
     build: .
-    environment:
     depends_on:
       - db
     ports:

@@ -190,9 +190,20 @@ type ListUserViewRoot struct {
 	IsAdmin bool
 }
 
+type TimeEfficiencyReport struct {
+	ID              int
+	Username        string
+	Firstname       string
+	Lastname        string
+	TrackedRecords  int
+	SummaryHours    string
+	AveragePerDay   string
+	AveragePerMonth string
+}
+
 type ReportRoot struct {
 	Tasks          []generic.TasksReport
-	TimeEfficiency []generic.TimeEfficiencyReport
+	TimeEfficiency []TimeEfficiencyReport
 }
 
 type ListProjectViewRoot struct {
